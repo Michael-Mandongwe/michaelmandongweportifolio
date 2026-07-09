@@ -193,7 +193,7 @@ function Hero() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href="#portfolio" className="btn-primary">View My Portfolio <ArrowRight size={16} /></a>
-              <a href="#" className="btn-gold"><Download size={16} /> Download My CV</a>
+              <a href="/cv.pdf" download="Michael-Mandongwe-CV.pdf" className="btn-gold"><Download size={16} /> Download My CV</a>
               <a href="#contact" className="btn-ghost">Contact Me</a>
             </div>
             <div className="mt-10 flex flex-wrap gap-2">
