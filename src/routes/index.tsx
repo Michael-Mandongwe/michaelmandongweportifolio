@@ -585,27 +585,36 @@ function Experience() {
 /* ---------- Certifications ---------- */
 function Certifications() {
   const items = [
-    { t: "Digital Marketing", o: "Uncommon.org", i: <Megaphone size={20} /> },
-    { t: "Web Development Certificate", o: "Certified Training", i: <Code2 size={20} /> },
-    { t: "Graphic Design Training", o: "Crash Course", i: <Palette size={20} /> },
-    { t: "Google Analytics", o: "Google", i: <TrendingUp size={20} /> },
-    { t: "Meta Digital Marketing", o: "Meta", i: <Target size={20} /> },
+    { t: "Digital Marketing", o: "Uncommon.org", i: <Megaphone size={20} />, file: "/certificates/digital-marketing.pdf" },
+    { t: "Web Development Certificate", o: "Certified Training", i: <Code2 size={20} />, file: "/certificates/web-development.pdf" },
+    { t: "Graphic Design Training", o: "Crash Course", i: <Palette size={20} />, file: "/certificates/graphic-design.pdf" },
+    { t: "Google Analytics", o: "Google", i: <TrendingUp size={20} />, file: "/certificates/google-analytics.pdf" },
+    { t: "Meta Digital Marketing", o: "Meta", i: <Target size={20} />, file: "/certificates/meta-digital-marketing.pdf" },
   ];
   return (
-    <Section id="certifications" eyebrow="Certifications" title={<>Trained & <span className="text-gradient">certified</span></>}>
+    <Section id="certifications" eyebrow="Certifications" title={<>Trained & <span className="text-gradient">certified</span></>} subtitle="Click any certificate to view or download.">
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((c) => (
           <div key={c.t} className="reveal card-elevated flex items-start gap-4 p-6">
             <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl text-white" style={{ background: "var(--gradient-primary)" }}>{c.i}</span>
-            <div className="min-w-0">
+            <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[color:var(--brand-gold)]">
                 <GraduationCap size={14} /> Certificate
               </div>
               <h3 className="mt-1 text-base font-semibold">{c.t}</h3>
               <p className="text-sm text-muted-foreground">{c.o}</p>
+              <a href={c.file} download target="_blank" rel="noreferrer"
+                 className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-[color:var(--brand-royal)] hover:underline">
+                <Download size={13} /> View / Download
+              </a>
             </div>
           </div>
         ))}
+      </div>
+      <div className="reveal mt-8 flex flex-wrap items-center justify-center gap-3 rounded-2xl border border-dashed border-border bg-muted/40 p-4 text-sm text-muted-foreground">
+        <Award size={16} className="text-[color:var(--brand-gold)]" />
+        Have a look at my full CV for the complete list.
+        <a href="/cv.pdf" download="Michael-Mandongwe-CV.pdf" className="btn-primary !py-2 !px-4 text-sm"><Download size={14} /> Download CV</a>
       </div>
     </Section>
   );
