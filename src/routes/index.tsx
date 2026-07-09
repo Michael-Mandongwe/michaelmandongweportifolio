@@ -193,7 +193,7 @@ function Hero() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href="#portfolio" className="btn-primary">View My Portfolio <ArrowRight size={16} /></a>
-              <a href="#" className="btn-gold"><Download size={16} /> Download My CV</a>
+              <a href="/cv.pdf" download="Michael-Mandongwe-CV.pdf" className="btn-gold"><Download size={16} /> Download My CV</a>
               <a href="#contact" className="btn-ghost">Contact Me</a>
             </div>
             <div className="mt-10 flex flex-wrap gap-2">
@@ -250,27 +250,61 @@ function Hero() {
   );
 }
 
+/* ---------- Half-portrait banner (between Hero and About) ---------- */
+function HalfBanner() {
+  return (
+    <section aria-hidden="true" className="relative">
+      <div className="container-x">
+        <div className="reveal relative -mt-6 mb-6 overflow-hidden rounded-3xl border border-border" style={{ boxShadow: "var(--shadow-elegant)" }}>
+          <div className="relative h-[220px] sm:h-[280px] md:h-[340px]">
+            <img
+              src={michaelAsset.url}
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover object-[center_20%]"
+              loading="lazy"
+            />
+            <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, color-mix(in oklab, var(--brand-royal) 85%, transparent) 0%, color-mix(in oklab, var(--brand-royal) 30%, transparent) 45%, transparent 70%)" }} />
+            <div className="absolute inset-0 flex items-center">
+              <div className="px-6 sm:px-10 md:px-14 max-w-xl text-white">
+                <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider backdrop-blur">
+                  <Sparkles size={12} className="text-[color:var(--brand-gold)]" /> Michael Mandongwe
+                </div>
+                <h3 className="font-display text-2xl font-bold leading-tight sm:text-3xl md:text-4xl">
+                  Design. Marketing. <span style={{ color: "var(--brand-gold)" }}>Growth.</span>
+                </h3>
+                <p className="mt-2 max-w-md text-sm text-white/85 sm:text-base">
+                  Turning ambitious brands into unforgettable experiences.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ---------- About ---------- */
 function About() {
+  const highlights = [
+    { icon: <Megaphone size={20} />, t: "Digital Marketing", d: "Strategy, SEO, paid ads, social media." },
+    { icon: <Palette size={20} />, t: "Graphic Design", d: "Brand identities, print, social creatives." },
+    { icon: <Layout size={20} />, t: "Web Design", d: "Fast, responsive, conversion-focused sites." },
+    { icon: <TrendingUp size={20} />, t: "Growth", d: "Analytics-led campaigns and lead-gen funnels." },
+  ];
   return (
     <Section id="about" eyebrow="About Me" title={<>Creative strategist blending <span className="text-gradient">marketing, design & code</span></>}>
       <div className="grid items-start gap-10 lg:grid-cols-[1fr_1.3fr]">
-        <div className="reveal">
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-border" style={{ boxShadow: "var(--shadow-soft)" }}>
-            <img src={michaelAsset.url} alt="Michael Mandongwe" className="h-full w-full object-cover" loading="lazy" />
-          </div>
-          <div className="mt-4 grid grid-cols-3 gap-3">
-            {[
-              { icon: <Megaphone size={18} />, l: "Marketing" },
-              { icon: <Palette size={18} />, l: "Design" },
-              { icon: <Layout size={18} />, l: "Web" },
-            ].map((b) => (
-              <div key={b.l} className="card-elevated flex items-center gap-2 p-3 text-sm">
-                <span className="grid h-8 w-8 place-items-center rounded-lg text-white" style={{ background: "var(--gradient-primary)" }}>{b.icon}</span>
-                <span className="font-medium">{b.l}</span>
+        <div className="reveal grid gap-4">
+          {highlights.map((h) => (
+            <div key={h.t} className="card-elevated flex items-start gap-4 p-5">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl text-white" style={{ background: "var(--gradient-primary)" }}>{h.icon}</span>
+              <div>
+                <div className="font-semibold">{h.t}</div>
+                <div className="text-sm text-muted-foreground">{h.d}</div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
         <div className="reveal space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
           <p>
@@ -291,7 +325,7 @@ function About() {
           </div>
           <div className="flex flex-wrap gap-3 pt-2">
             <a href="#contact" className="btn-primary">Work with me <ArrowRight size={16} /></a>
-            <a href="#" className="btn-ghost"><Download size={16} /> Download CV</a>
+            <a href="/cv.pdf" download="Michael-Mandongwe-CV.pdf" className="btn-ghost"><Download size={16} /> Download CV</a>
           </div>
         </div>
       </div>
@@ -551,27 +585,36 @@ function Experience() {
 /* ---------- Certifications ---------- */
 function Certifications() {
   const items = [
-    { t: "Digital Marketing", o: "Uncommon.org", i: <Megaphone size={20} /> },
-    { t: "Web Development Certificate", o: "Certified Training", i: <Code2 size={20} /> },
-    { t: "Graphic Design Training", o: "Crash Course", i: <Palette size={20} /> },
-    { t: "Google Analytics", o: "Google", i: <TrendingUp size={20} /> },
-    { t: "Meta Digital Marketing", o: "Meta", i: <Target size={20} /> },
+    { t: "Digital Marketing", o: "Uncommon.org", i: <Megaphone size={20} />, file: "/certificates/digital-marketing.pdf" },
+    { t: "Web Development Certificate", o: "Certified Training", i: <Code2 size={20} />, file: "/certificates/web-development.pdf" },
+    { t: "Graphic Design Training", o: "Crash Course", i: <Palette size={20} />, file: "/certificates/graphic-design.pdf" },
+    { t: "Google Analytics", o: "Google", i: <TrendingUp size={20} />, file: "/certificates/google-analytics.pdf" },
+    { t: "Meta Digital Marketing", o: "Meta", i: <Target size={20} />, file: "/certificates/meta-digital-marketing.pdf" },
   ];
   return (
-    <Section id="certifications" eyebrow="Certifications" title={<>Trained & <span className="text-gradient">certified</span></>}>
+    <Section id="certifications" eyebrow="Certifications" title={<>Trained & <span className="text-gradient">certified</span></>} subtitle="Click any certificate to view or download.">
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((c) => (
           <div key={c.t} className="reveal card-elevated flex items-start gap-4 p-6">
             <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl text-white" style={{ background: "var(--gradient-primary)" }}>{c.i}</span>
-            <div className="min-w-0">
+            <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[color:var(--brand-gold)]">
                 <GraduationCap size={14} /> Certificate
               </div>
               <h3 className="mt-1 text-base font-semibold">{c.t}</h3>
               <p className="text-sm text-muted-foreground">{c.o}</p>
+              <a href={c.file} download target="_blank" rel="noreferrer"
+                 className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-[color:var(--brand-royal)] hover:underline">
+                <Download size={13} /> View / Download
+              </a>
             </div>
           </div>
         ))}
+      </div>
+      <div className="reveal mt-8 flex flex-wrap items-center justify-center gap-3 rounded-2xl border border-dashed border-border bg-muted/40 p-4 text-sm text-muted-foreground">
+        <Award size={16} className="text-[color:var(--brand-gold)]" />
+        Have a look at my full CV for the complete list.
+        <a href="/cv.pdf" download="Michael-Mandongwe-CV.pdf" className="btn-primary !py-2 !px-4 text-sm"><Download size={14} /> Download CV</a>
       </div>
     </Section>
   );
@@ -747,10 +790,14 @@ function Portfolio() {
   useReveal();
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground bg-aurora">
+      <div className="aurora-layer" aria-hidden="true" />
+      <div className="grid-overlay" aria-hidden="true" />
+      <div className="noise-overlay" aria-hidden="true" />
       <Nav dark={dark} setDark={setDark} />
-      <main>
+      <main className="relative">
         <Hero />
+        <HalfBanner />
         <About />
         <Skills />
         <Services />
