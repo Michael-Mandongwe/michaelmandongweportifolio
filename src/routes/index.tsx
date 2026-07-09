@@ -790,10 +790,14 @@ function Portfolio() {
   useReveal();
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground bg-aurora">
+      <div className="aurora-layer" aria-hidden="true" />
+      <div className="grid-overlay" aria-hidden="true" />
+      <div className="noise-overlay" aria-hidden="true" />
       <Nav dark={dark} setDark={setDark} />
-      <main>
+      <main className="relative">
         <Hero />
+        <HalfBanner />
         <About />
         <Skills />
         <Services />
