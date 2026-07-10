@@ -1046,6 +1046,9 @@ function Portfolio() {
         <Skills />
         <Services />
         <Portfolio_Section />
+        <AcademicProject />
+        <Education />
+        <Teaching />
         <Experience />
         <Certifications />
         <Testimonials />
