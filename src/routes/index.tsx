@@ -355,7 +355,15 @@ function Skills() {
     },
     {
       title: "Website Design & Development", icon: <Code2 size={20} />,
-      items: ["Responsive Website Design","Landing Page Design","UI/UX Design","WordPress","Lovable AI","HTML","CSS"],
+      items: ["Responsive Website Design","Landing Page Design","WordPress","Lovable AI","HTML","CSS"],
+    },
+    {
+      title: "UI/UX Design", icon: <FigmaIcon size={20} />,
+      items: ["Mobile App Design","Wireframing","User Interface Design","User Experience Design","Prototyping","Figma","Canva"],
+    },
+    {
+      title: "Teaching & Leadership", icon: <GraduationCap size={20} />,
+      items: ["Scratch Programming","Mentoring","Classroom Facilitation","Leadership","Communication","Curriculum Design"],
     },
   ];
   return (
