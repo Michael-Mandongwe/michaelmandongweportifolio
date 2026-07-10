@@ -293,7 +293,9 @@ function About() {
   const highlights = [
     { icon: <Megaphone size={20} />, t: "Digital Marketing", d: "Strategy, SEO, paid ads, social media." },
     { icon: <Palette size={20} />, t: "Graphic Design", d: "Brand identities, print, social creatives." },
-    { icon: <Layout size={20} />, t: "Web Design", d: "Fast, responsive, conversion-focused sites." },
+    { icon: <Layout size={20} />, t: "Web & UI/UX Design", d: "Fast, responsive, conversion-focused sites & app interfaces." },
+    { icon: <PenTool size={20} />, t: "Branding & Content", d: "Distinctive identities and content that stops the scroll." },
+    { icon: <GraduationCap size={20} />, t: "Teaching & Mentoring", d: "Scratch coding volunteer & teacher-in-training." },
     { icon: <TrendingUp size={20} />, t: "Growth", d: "Analytics-led campaigns and lead-gen funnels." },
   ];
   return (
