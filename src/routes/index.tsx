@@ -556,6 +556,233 @@ function Portfolio_Section() {
   );
 }
 
+/* ---------- Featured Academic Project: NMB Mobile Banking App ---------- */
+function AcademicProject() {
+  const screens = [
+    { label: "Sign In", g: "linear-gradient(160deg,#0B3D91,#1e5cd6)", icon: <Smartphone size={26} /> },
+    { label: "Dashboard", g: "linear-gradient(160deg,#111827,#0B3D91)", icon: <Layout size={26} /> },
+    { label: "Transfer", g: "linear-gradient(160deg,#1e5cd6,#F59E0B)", icon: <ArrowUpRight size={26} /> },
+  ];
+  return (
+    <Section
+      id="academic"
+      eyebrow="Featured Academic Project"
+      title={<>NMB Mobile Banking App <span className="text-gradient">UI/UX Design</span></>}
+      subtitle="As part of my Graphic Design training at Uncommon.org, I designed a modern mobile banking application interface for NMB Bank — from wireframes to polished, high-fidelity screens."
+    >
+      <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
+        {/* Mockup cluster */}
+        <div className="reveal relative">
+          <div className="absolute -inset-6 rounded-[2rem] opacity-25 blur-3xl" style={{ background: "var(--gradient-primary)" }} />
+          <div className="relative grid grid-cols-3 gap-4 sm:gap-6">
+            {screens.map((s, i) => (
+              <div
+                key={s.label}
+                className="group relative aspect-[9/19] overflow-hidden rounded-[2rem] border-[6px] border-foreground/90 bg-black shadow-[var(--shadow-elegant)] transition-transform duration-500 hover:-translate-y-2"
+                style={{ transform: `translateY(${i === 1 ? "-14px" : "14px"})` }}
+              >
+                <div className="absolute inset-0" style={{ background: s.g }} />
+                <div className="absolute left-1/2 top-2 h-1.5 w-16 -translate-x-1/2 rounded-full bg-black/60" />
+                <div className="absolute inset-x-3 top-8 rounded-xl bg-white/15 p-2 backdrop-blur">
+                  <div className="h-2 w-10 rounded-full bg-white/70" />
+                  <div className="mt-1.5 h-1.5 w-16 rounded-full bg-white/40" />
+                </div>
+                <div className="absolute inset-x-3 top-24 grid gap-2">
+                  <div className="h-14 rounded-xl bg-white/15 backdrop-blur" />
+                  <div className="h-10 rounded-xl bg-white/10 backdrop-blur" />
+                  <div className="h-10 rounded-xl bg-white/10 backdrop-blur" />
+                </div>
+                <div className="absolute inset-x-3 bottom-4 flex items-center gap-2 rounded-xl bg-white/15 p-2 backdrop-blur">
+                  <span className="grid h-8 w-8 place-items-center rounded-lg bg-white/25 text-white">{s.icon}</span>
+                  <div className="flex-1">
+                    <div className="h-1.5 w-14 rounded-full bg-white/70" />
+                    <div className="mt-1 h-1.5 w-10 rounded-full bg-white/40" />
+                  </div>
+                </div>
+                <div className="absolute left-3 top-3 rounded-full bg-black/30 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-widest text-white/90 backdrop-blur">
+                  NMB
+                </div>
+                <div className="absolute inset-x-0 bottom-[-2px] flex items-center justify-center pb-1">
+                  <span className="rounded-full bg-white/90 px-2 py-0.5 text-[10px] font-semibold text-foreground">{s.label}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Case study body */}
+        <div className="reveal space-y-6">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-3 py-1.5 text-xs font-medium">
+            <FigmaIcon size={14} className="text-[color:var(--brand-royal)]" />
+            Uncommon.org · Graphic Design Training
+          </div>
+          <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+            A complete UI/UX exploration for a mobile banking product — covering onboarding, account dashboards, transfers, bill payments and transaction history. Designed for clarity, trust and effortless day-to-day banking.
+          </p>
+          <div>
+            <div className="mb-3 text-xs font-semibold uppercase tracking-wider text-[color:var(--brand-gold)]">Scope of work</div>
+            <div className="flex flex-wrap gap-2">
+              {["User Interface Design","User Experience Design","Mobile App Layout","Wireframing","Visual Design","Prototyping","Design System"].map((r) => (
+                <span key={r} className="rounded-full border border-border bg-muted/60 px-3 py-1.5 text-xs font-medium">{r}</span>
+              ))}
+            </div>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {[
+              { icon: <Target size={18} />, t: "Clarity-first UX", d: "Simple flows that reduce friction for daily banking tasks." },
+              { icon: <Palette size={18} />, t: "Trusted visual system", d: "Confident colour, typography and iconography." },
+              { icon: <Smartphone size={18} />, t: "Mobile-native", d: "Thumb-friendly layouts and native gesture patterns." },
+              { icon: <Lightbulb size={18} />, t: "Modern & bold", d: "Fresh interface that stands apart from legacy banking apps." },
+            ].map((f) => (
+              <div key={f.t} className="card-elevated flex items-start gap-3 p-4">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg text-white" style={{ background: "var(--gradient-primary)" }}>{f.icon}</span>
+                <div>
+                  <div className="text-sm font-semibold">{f.t}</div>
+                  <div className="text-xs text-muted-foreground">{f.d}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="flex items-center gap-2 border-t border-border pt-4 text-xs text-muted-foreground">
+            <span className="font-semibold text-foreground">Tools:</span> Figma · Canva
+          </div>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+/* ---------- Education & Learning Journey ---------- */
+function Education() {
+  const items = [
+    { t: "Digital Marketing Graduate", d: "Completed the Uncommon.org Digital Marketing program — strategy, SEO, paid media, analytics and campaign management.", icon: <Megaphone size={18} />, tag: "Graduate" },
+    { t: "Graphic Design Training", d: "Hands-on training in brand identity, layout, typography and mobile app UI/UX using Figma and Canva.", icon: <Palette size={18} />, tag: "Completed" },
+    { t: "Web Development Training", d: "Built responsive websites and landing pages with HTML, CSS and modern tooling — from wireframe to launch.", icon: <Code2 size={18} />, tag: "Completed" },
+    { t: "Teacher Training Program", d: "Currently developing teaching, mentoring, leadership and classroom facilitation skills at Uncommon.org.", icon: <GraduationCap size={18} />, tag: "In Progress" },
+  ];
+  return (
+    <Section
+      id="education"
+      eyebrow="Education & Learning Journey"
+      title={<>My path at <span className="text-gradient">Uncommon.org</span></>}
+      subtitle="A learning journey that has equipped me with practical skills in digital marketing, graphic design, website development, and leadership."
+    >
+      <div className="relative">
+        <div className="absolute left-4 top-2 bottom-2 w-px bg-border md:left-1/2" />
+        <div className="space-y-10">
+          {items.map((it, i) => (
+            <div key={it.t} className={`reveal relative grid gap-6 md:grid-cols-2 ${i % 2 ? "md:[&>*:first-child]:col-start-2" : ""}`}>
+              <div className={`pl-12 md:pl-0 ${i % 2 ? "md:pr-12 md:text-right" : "md:pr-12"}`}>
+                <div className="card-elevated p-6">
+                  <div className={`flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[color:var(--brand-gold)] ${i % 2 ? "md:justify-end" : ""}`}>
+                    <BookOpen size={14} /> Uncommon.org · {it.tag}
+                  </div>
+                  <h3 className="mt-2 flex items-center gap-2 text-lg font-semibold md:inline-flex">
+                    <span className="grid h-8 w-8 place-items-center rounded-lg text-white" style={{ background: "var(--gradient-primary)" }}>{it.icon}</span>
+                    {it.t}
+                  </h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{it.d}</p>
+                </div>
+              </div>
+              <div className="absolute left-4 top-6 grid h-4 w-4 -translate-x-1/2 place-items-center md:left-1/2">
+                <span className="h-4 w-4 rounded-full ring-4 ring-background" style={{ background: "var(--gradient-gold)" }} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+/* ---------- Teaching & Community Impact ---------- */
+function Teaching() {
+  return (
+    <Section
+      id="teaching"
+      eyebrow="Teaching & Community Impact"
+      title={<>Empowering the <span className="text-gradient">next generation</span></>}
+      subtitle="Beyond client work, I invest my time in mentoring young learners and developing my own teaching craft."
+    >
+      <div className="grid gap-6 lg:grid-cols-2">
+        {/* Scratch Coding Volunteer */}
+        <article className="reveal card-elevated relative overflow-hidden p-8">
+          <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full opacity-25 blur-3xl" style={{ background: "var(--gradient-primary)" }} />
+          <div className="flex items-start gap-4">
+            <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl text-white" style={{ background: "var(--gradient-primary)" }}>
+              <Code2 size={26} />
+            </span>
+            <div>
+              <div className="text-xs font-semibold uppercase tracking-wider text-[color:var(--brand-gold)]">Volunteer</div>
+              <h3 className="mt-1 text-xl font-bold">Scratch Coding Facilitator</h3>
+              <p className="mt-2 text-sm text-muted-foreground">
+                I volunteer as a Scratch Coding Facilitator, helping young learners understand the basics of programming through fun and interactive coding activities.
+              </p>
+            </div>
+          </div>
+          <ul className="mt-6 grid gap-2 sm:grid-cols-2">
+            {[
+              "Teaching Scratch Programming",
+              "Mentoring Students",
+              "Creating Interactive Lessons",
+              "Encouraging Creativity Through Tech",
+            ].map((r) => (
+              <li key={r} className="flex items-start gap-2 text-sm">
+                <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-[color:var(--brand-gold)]" /> <span>{r}</span>
+              </li>
+            ))}
+          </ul>
+        </article>
+
+        {/* Teacher Training */}
+        <article className="reveal card-elevated relative overflow-hidden p-8">
+          <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full opacity-25 blur-3xl" style={{ background: "var(--gradient-gold)" }} />
+          <div className="flex items-start gap-4">
+            <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl text-white" style={{ background: "var(--gradient-gold)" }}>
+              <GraduationCap size={26} />
+            </span>
+            <div>
+              <div className="text-xs font-semibold uppercase tracking-wider text-[color:var(--brand-gold)]">Currently Enrolled</div>
+              <h3 className="mt-1 text-xl font-bold">Teacher Training Program</h3>
+              <p className="mt-2 text-sm text-muted-foreground">
+                I'm currently participating in the Uncommon.org Teacher Training Program, developing my teaching, leadership, mentoring, and classroom facilitation skills.
+              </p>
+            </div>
+          </div>
+          <ul className="mt-6 grid gap-2 sm:grid-cols-2">
+            {[
+              "Teaching & Facilitation",
+              "Leadership Development",
+              "Mentoring & Coaching",
+              "Curriculum & Lesson Design",
+            ].map((r) => (
+              <li key={r} className="flex items-start gap-2 text-sm">
+                <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-[color:var(--brand-gold)]" /> <span>{r}</span>
+              </li>
+            ))}
+          </ul>
+        </article>
+      </div>
+
+      {/* Professional statement */}
+      <div className="reveal mt-12 relative overflow-hidden rounded-3xl border border-border p-8 sm:p-12" style={{ background: "var(--gradient-primary)", boxShadow: "var(--shadow-elegant)" }}>
+        <div className="pointer-events-none absolute -right-10 -top-10 h-64 w-64 rounded-full opacity-30 blur-3xl" style={{ background: "var(--gradient-gold)" }} />
+        <Quote className="text-white/70" size={40} />
+        <p className="mt-4 max-w-4xl text-lg font-medium leading-relaxed text-white sm:text-2xl">
+          "I believe that great digital experiences are created through the perfect combination of strategy, creativity, technology, and continuous learning. My goal is to help businesses and communities grow by delivering impactful marketing, beautiful designs, innovative websites, and meaningful digital solutions."
+        </p>
+        <div className="mt-6 flex items-center gap-3 text-white/90">
+          <span className="grid h-11 w-11 place-items-center rounded-full bg-white/15 font-bold backdrop-blur">MM</span>
+          <div>
+            <div className="text-sm font-semibold">Michael Mandongwe</div>
+            <div className="text-xs text-white/70">Digital Marketing · Design · Web · Teaching</div>
+          </div>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
 /* ---------- Experience ---------- */
 function Experience() {
   const items = [
