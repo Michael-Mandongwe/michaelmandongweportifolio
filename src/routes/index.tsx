@@ -6,6 +6,7 @@ import {
   Palette, Layout, Search, Megaphone, PenTool, Users, TrendingUp,
   Award, CheckCircle2, Star, ExternalLink, Briefcase, GraduationCap,
   Globe, Code2, Figma as FigmaIcon, Instagram, ArrowUpRight,
+  BookOpen, Smartphone, Lightbulb, Heart, Quote,
 } from "lucide-react";
 import michaelAsset from "@/assets/michael.png.asset.json";
 
