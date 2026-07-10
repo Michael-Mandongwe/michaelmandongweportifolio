@@ -314,10 +314,13 @@ function About() {
         </div>
         <div className="reveal space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
           <p>
-            Hello, I'm <strong className="text-foreground">Michael Mandongwe</strong>, a passionate Digital Marketing Specialist, Graphic Designer, and Website Designer dedicated to helping businesses grow through creativity, strategy, and technology.
+            Hello, I'm <strong className="text-foreground">Michael Mandongwe</strong>, a passionate Digital Marketing Specialist, Graphic Designer, Website Designer, and UI/UX Designer dedicated to helping businesses and communities grow through creativity, strategy, and technology.
           </p>
           <p>
-            My expertise spans digital marketing, branding, graphic design, website development, SEO, paid advertising, social media management, content creation, and lead generation. Through my training and hands-on client work, I have developed impactful marketing campaigns, engaging visual identities, and modern websites that strengthen brands and drive measurable business growth.
+            My experience spans <strong className="text-foreground">digital marketing, graphic design, website design, UI/UX design, branding, content creation, and teaching & mentoring</strong>. Through my training at Uncommon.org and hands-on client work, I have developed impactful marketing campaigns, engaging visual identities, modern websites, and mobile app interfaces that strengthen brands and drive measurable business growth.
+          </p>
+          <p>
+            Beyond client work, I volunteer as a Scratch Coding Facilitator for young learners and I'm currently part of the Uncommon.org Teacher Training Program — sharpening my leadership, mentoring, and classroom facilitation skills.
           </p>
           <p className="text-foreground font-medium">
             I believe great marketing is built on creativity, data, and meaningful customer experiences.
