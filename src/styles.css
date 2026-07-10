@@ -114,6 +114,10 @@
                    linear-gradient(180deg, #0b1020 0%, #0a0f1e 100%);
   --shadow-soft: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
   --shadow-elegant: 0 10px 40px -12px rgba(30,92,214,.45);
+
+  /* Brighten gradient text/primary in dark mode so the royal-blue half stays readable on dark navy backgrounds */
+  --gradient-primary: linear-gradient(135deg, #3b7cf0 0%, #6aa1ff 100%);
+  --gradient-text: linear-gradient(135deg, #6aa1ff 0%, #fbbf24 100%);
 }
 
 @layer base {
