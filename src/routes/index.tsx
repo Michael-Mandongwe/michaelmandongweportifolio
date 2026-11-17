@@ -7,6 +7,7 @@ import {
   Award, CheckCircle2, Star, ExternalLink, Briefcase, GraduationCap,
   Globe, Code2, Figma as FigmaIcon, Instagram, ArrowUpRight,
   BookOpen, Smartphone, Lightbulb, Heart, Quote,
+  Images, Expand, ChevronLeft, ChevronRight, ImagePlus,
 } from "lucide-react";
 import michaelAsset from "@/assets/michael.png.asset.json";
 
@@ -41,6 +42,7 @@ const NAV = [
   { id: "skills", label: "Skills" },
   { id: "services", label: "Services" },
   { id: "portfolio", label: "Portfolio" },
+  { id: "client-work", label: "Client Work" },
   { id: "academic", label: "Case Study" },
   { id: "education", label: "Education" },
   { id: "teaching", label: "Teaching" },
@@ -110,34 +112,34 @@ function Nav({ dark, setDark }: { dark: boolean; setDark: (v: boolean) => void }
 
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-all ${scrolled ? "py-2" : "py-4"}`}>
-      <div className="container-x">
-        <div className={`glass flex items-center justify-between rounded-full px-4 py-2.5 sm:px-6 ${scrolled ? "shadow-[var(--shadow-soft)]" : ""}`}>
-          <a href="#home" className="flex items-center gap-2 font-display font-bold">
+      <div className="mx-auto w-full max-w-[1440px] px-4 sm:px-6">
+        <div className={`glass flex items-center justify-between rounded-full px-3 py-2.5 sm:px-4 ${scrolled ? "shadow-[var(--shadow-soft)]" : ""}`}>
+          <a href="#home" className="flex shrink-0 items-center gap-2 font-display font-bold">
             <span className="grid h-9 w-9 place-items-center rounded-full text-white" style={{ background: "var(--gradient-primary)" }}>MM</span>
-            <span className="hidden sm:inline text-foreground">Michael Mandongwe</span>
+            <span className="hidden 2xl:inline text-foreground">Michael Mandongwe</span>
           </a>
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden xl:flex min-w-0 items-center gap-0 overflow-x-auto no-scrollbar">
             {NAV.map((n) => (
               <a key={n.id} href={`#${n.id}`}
-                className="rounded-full px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
+                className="shrink-0 rounded-full px-2 py-1.5 text-[13px] font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
                 {n.label}
               </a>
             ))}
           </nav>
-          <div className="flex items-center gap-2">
+          <div className="flex shrink-0 items-center gap-2">
             <button onClick={() => setDark(!dark)}
               className="grid h-9 w-9 place-items-center rounded-full border border-border bg-background/60 hover:bg-muted transition"
               aria-label="Toggle theme">
               {dark ? <Sun size={16} /> : <Moon size={16} />}
             </button>
             <a href="#contact" className="hidden md:inline-flex btn-primary !py-2 !px-4 text-sm">Let's talk<ArrowRight size={14} /></a>
-            <button className="lg:hidden grid h-9 w-9 place-items-center rounded-full border border-border" onClick={() => setOpen(!open)} aria-label="Menu">
+            <button className="xl:hidden grid h-9 w-9 place-items-center rounded-full border border-border" onClick={() => setOpen(!open)} aria-label="Menu">
               {open ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
         </div>
         {open && (
-          <div className="lg:hidden glass mt-2 rounded-2xl p-3">
+          <div className="xl:hidden glass mt-2 rounded-2xl p-3">
             <div className="grid gap-1">
               {NAV.map((n) => (
                 <a key={n.id} href={`#${n.id}`} onClick={() => setOpen(false)}
@@ -430,21 +432,31 @@ function Services() {
 type Project = {
   title: string; tag: string; blurb: string;
   responsibilities: string[]; tools?: string[]; achievements?: string[];
-  gradient: string; icon: ReactNode;
+  gradient: string; icon: ReactNode; image?: string;
 };
 
 function ProjectCard({ p }: { p: Project }) {
   return (
     <article className="reveal card-elevated group overflow-hidden">
       <div className="relative aspect-[16/10] overflow-hidden">
-        <div className="absolute inset-0" style={{ background: p.gradient }} />
-        <div className="absolute inset-0 opacity-30 mix-blend-overlay"
-          style={{ backgroundImage: "radial-gradient(circle at 20% 20%, rgba(255,255,255,.5), transparent 40%), radial-gradient(circle at 80% 60%, rgba(0,0,0,.35), transparent 45%)" }} />
-        <div className="absolute inset-0 grid place-items-center">
-          <div className="glass grid h-20 w-20 place-items-center rounded-2xl text-white transition-transform duration-500 group-hover:scale-110" style={{ background: "rgba(255,255,255,.15)" }}>
-            {p.icon}
-          </div>
-        </div>
+        {p.image ? (
+          <>
+            <img src={p.image} alt={`${p.title} — client work`} loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
+          </>
+        ) : (
+          <>
+            <div className="absolute inset-0" style={{ background: p.gradient }} />
+            <div className="absolute inset-0 opacity-30 mix-blend-overlay"
+              style={{ backgroundImage: "radial-gradient(circle at 20% 20%, rgba(255,255,255,.5), transparent 40%), radial-gradient(circle at 80% 60%, rgba(0,0,0,.35), transparent 45%)" }} />
+            <div className="absolute inset-0 grid place-items-center">
+              <div className="glass grid h-20 w-20 place-items-center rounded-2xl text-white transition-transform duration-500 group-hover:scale-110" style={{ background: "rgba(255,255,255,.15)" }}>
+                {p.icon}
+              </div>
+            </div>
+          </>
+        )}
         <div className="absolute top-4 left-4">
           <span className="rounded-full bg-black/40 px-3 py-1 text-xs font-medium text-white backdrop-blur">{p.tag}</span>
         </div>
@@ -485,6 +497,7 @@ function Portfolio_Section() {
       tools: ["Lovable AI", "Figma", "HTML", "CSS"],
       gradient: "linear-gradient(135deg,#0B3D91 0%,#1e5cd6 60%,#F59E0B 130%)",
       icon: <Globe size={30} />,
+      image: imagesFor("makumbe-avril-holdings")[0]?.url,
     },
     {
       title: "Dynamic Sales Solutions", tag: "Digital Marketing",
@@ -493,6 +506,7 @@ function Portfolio_Section() {
       achievements: ["Grew LinkedIn from ~60 to 300+ followers", "Facebook page grew past 1,000 followers", "Designed promotional flyers & branded assets"],
       gradient: "linear-gradient(135deg,#111827 0%,#0B3D91 100%)",
       icon: <TrendingUp size={30} />,
+      image: imagesFor("dynamic-sales-solutions")[0]?.url,
     },
     {
       title: "Clothsations", tag: "Ads · Design",
@@ -501,6 +515,7 @@ function Portfolio_Section() {
       achievements: ["Promotional flyers & product ads", "Social creatives & campaigns", "Lead-gen funnels"],
       gradient: "linear-gradient(135deg,#F59E0B 0%,#f97316 60%,#0B3D91 130%)",
       icon: <Megaphone size={30} />,
+      image: imagesFor("clothsations")[0]?.url,
     },
     {
       title: "Sneakers Vault ZW", tag: "Brand Build",
@@ -552,6 +567,194 @@ function Portfolio_Section() {
           </div>
         ))}
       </div>
+    </Section>
+  );
+}
+
+/* ---------- Client Work: photos auto-load from src/assets/work/<company>/ ---------- */
+const workPointers = import.meta.glob("../assets/work/*/*.asset.json", { eager: true, import: "default" }) as Record<string, { url: string }>;
+const workFiles = import.meta.glob("../assets/work/*/*.{jpg,jpeg,png,webp,gif,avif}", { eager: true, import: "default" }) as Record<string, string>;
+
+type WorkImage = { url: string; caption: string; name: string };
+
+const captionFromPath = (path: string) => {
+  const file = path.split("/").pop() || "";
+  const base = file.replace(/\.asset\.json$/i, "").replace(/\.[a-z0-9]+$/i, "");
+  const words = base.replace(/[-_]+/g, " ").replace(/\s+/g, " ").trim();
+  return words ? words.charAt(0).toUpperCase() + words.slice(1) : "Client work";
+};
+
+const imagesFor = (slug: string): WorkImage[] => {
+  const mark = `/work/${slug}/`;
+  const out: WorkImage[] = [];
+  for (const [path, mod] of Object.entries(workPointers)) {
+    if (path.includes(mark) && mod && typeof mod.url === "string") {
+      out.push({ url: mod.url, caption: captionFromPath(path), name: path.split("/").pop() || "" });
+    }
+  }
+  for (const [path, url] of Object.entries(workFiles)) {
+    if (path.includes(mark) && typeof url === "string") {
+      out.push({ url, caption: captionFromPath(path), name: path.split("/").pop() || "" });
+    }
+  }
+  return out.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
+};
+
+const CLIENT_WORK = [
+  {
+    slug: "dynamic-sales-solutions",
+    name: "Dynamic Sales Solutions",
+    role: "Digital Marketing Specialist",
+    tag: "Digital Marketing · Social Growth",
+    blurb: "Owned the company's digital presence end to end — campaign strategy, content calendars, community management and the design of every promotional asset that went out.",
+    achievements: ["LinkedIn grew from ~60 to 300+ followers", "Facebook page passed 1,000 followers", "Promotional flyers & branded asset systems"],
+    gradient: "linear-gradient(135deg,#111827 0%,#0B3D91 100%)",
+    icon: <TrendingUp size={26} />,
+  },
+  {
+    slug: "clothsations",
+    name: "Clothsations",
+    role: "Digital Marketer & Sales Representative",
+    tag: "Meta Ads · Creative · Lead Gen",
+    blurb: "Ran paid advertising and creative for a lifestyle brand — product ads, lead-generation funnels and a steady stream of social content built to sell.",
+    achievements: ["Meta ad campaigns & product creatives", "Lead-gen funnels and offer design", "Daily social content & customer engagement"],
+    gradient: "linear-gradient(135deg,#F59E0B 0%,#f97316 60%,#0B3D91 130%)",
+    icon: <Megaphone size={26} />,
+  },
+  {
+    slug: "makumbe-avril-holdings",
+    name: "Makumbe Avril Holdings",
+    role: "Website Design · Branding",
+    tag: "Website · Brand Identity",
+    blurb: "Designed and built a modern corporate website with premium UX, responsive layouts, service pages, contact forms and the supporting brand identity.",
+    achievements: ["Responsive corporate website", "Service & contact page design", "Brand identity and supporting graphics"],
+    gradient: "linear-gradient(135deg,#0B3D91 0%,#1e5cd6 60%,#F59E0B 130%)",
+    icon: <Globe size={26} />,
+  },
+];
+
+/* ---------- Full-size image viewer ---------- */
+function Lightbox({ items, index, setIndex, onClose }: {
+  items: WorkImage[]; index: number; setIndex: (i: number) => void; onClose: () => void;
+}) {
+  const item = items[index];
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      else if (e.key === "ArrowRight") setIndex((index + 1) % items.length);
+      else if (e.key === "ArrowLeft") setIndex((index - 1 + items.length) % items.length);
+    };
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [index, items.length, onClose, setIndex]);
+
+  if (!item) return null;
+  const nav = "grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur transition hover:bg-white/25";
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
+      onClick={onClose} role="dialog" aria-modal="true" aria-label={item.caption}>
+      <button className={`${nav} absolute right-4 top-4`} onClick={onClose} aria-label="Close viewer"><X size={20} /></button>
+      {items.length > 1 && (
+        <>
+          <button className={`${nav} absolute left-3 top-1/2 -translate-y-1/2 sm:left-6`} aria-label="Previous image"
+            onClick={(e) => { e.stopPropagation(); setIndex((index - 1 + items.length) % items.length); }}>
+            <ChevronLeft size={22} />
+          </button>
+          <button className={`${nav} absolute right-3 top-1/2 -translate-y-1/2 sm:right-6`} aria-label="Next image"
+            onClick={(e) => { e.stopPropagation(); setIndex((index + 1) % items.length); }}>
+            <ChevronRight size={22} />
+          </button>
+        </>
+      )}
+      <figure className="max-h-[88vh] w-full max-w-5xl overflow-hidden rounded-2xl border border-white/10 bg-white/5"
+        onClick={(e) => e.stopPropagation()}>
+        <img src={item.url} alt={item.caption} className="mx-auto max-h-[76vh] w-full object-contain" />
+        <figcaption className="flex items-center justify-between gap-4 border-t border-white/10 px-5 py-3 text-sm text-white/85">
+          <span className="truncate">{item.caption}</span>
+          <span className="shrink-0 tabular-nums text-white/60">{index + 1} / {items.length}</span>
+        </figcaption>
+      </figure>
+    </div>
+  );
+}
+
+/* ---------- Client Work section ---------- */
+function ClientWork() {
+  const [open, setOpen] = useState<{ slug: string; index: number } | null>(null);
+  const companies = CLIENT_WORK.map((c) => ({ ...c, images: imagesFor(c.slug) }));
+  const active = open ? companies.find((c) => c.slug === open.slug) : null;
+
+  return (
+    <Section id="client-work" eyebrow="Client Work"
+      title={<>Real work for <span className="text-gradient">real brands</span></>}
+      subtitle="Every piece below was designed, written or shipped for a company I worked with. Click any image to view it full size.">
+      {companies.map((c) => (
+        <div key={c.slug} className="reveal card-elevated mt-8 overflow-hidden first:mt-0">
+          <div className="relative overflow-hidden p-6 sm:p-8">
+            <div className="pointer-events-none absolute inset-0 opacity-[0.13]" style={{ background: c.gradient }} />
+            <div className="relative flex flex-wrap items-start gap-5">
+              <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl text-white" style={{ background: "var(--gradient-primary)" }}>{c.icon}</span>
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <h3 className="text-xl font-bold sm:text-2xl">{c.name}</h3>
+                  <span className="rounded-full border border-border bg-background/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{c.tag}</span>
+                </div>
+                <div className="mt-1 text-xs font-semibold uppercase tracking-wider text-[color:var(--brand-gold)]">{c.role}</div>
+                <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">{c.blurb}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {c.achievements.map((a) => (
+                    <span key={a} className="inline-flex items-center gap-1.5 rounded-full bg-muted/70 px-3 py-1.5 text-xs font-medium">
+                      <CheckCircle2 size={13} className="text-[color:var(--brand-gold)]" /> {a}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <Images size={14} /> {c.images.length} {c.images.length === 1 ? "piece" : "pieces"}
+              </div>
+            </div>
+          </div>
+
+          {c.images.length > 0 ? (
+            <div className="grid gap-3 border-t border-border p-4 sm:grid-cols-3 sm:p-5 lg:grid-cols-4">
+              {c.images.map((img, i) => (
+                <button key={img.url} type="button" onClick={() => setOpen({ slug: c.slug, index: i })}
+                  className="group relative aspect-[4/3] overflow-hidden rounded-xl border border-border bg-muted text-left focus:outline-none focus-visible:ring-4 focus-visible:ring-[color:var(--brand-royal)]/25">
+                  <img src={img.url} alt={`${c.name} — ${img.caption}`} loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-70 transition group-hover:opacity-100" />
+                  <span className="absolute inset-x-3 bottom-3 flex items-center justify-between gap-2">
+                    <span className="truncate text-xs font-semibold text-white">{img.caption}</span>
+                    <Expand size={14} className="shrink-0 text-white/85" />
+                  </span>
+                </button>
+              ))}
+            </div>
+          ) : (
+            <div className="border-t border-border p-4 sm:p-5">
+              <div className="grid place-items-center gap-2 rounded-xl border border-dashed border-border bg-muted/40 px-6 py-12 text-center">
+                <ImagePlus size={22} className="text-[color:var(--brand-gold)]" />
+                <div className="text-sm font-semibold">Photos coming soon</div>
+                <p className="max-w-md text-xs text-muted-foreground">
+                  Upload the {c.name} artwork and it drops into this gallery automatically.
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+      ))}
+
+      {active && open && (
+        <Lightbox items={active.images} index={open.index}
+          setIndex={(i) => setOpen({ slug: active.slug, index: i })}
+          onClose={() => setOpen(null)} />
+      )}
     </Section>
   );
 }
@@ -1046,6 +1249,7 @@ function Portfolio() {
         <Skills />
         <Services />
         <Portfolio_Section />
+        <ClientWork />
         <AcademicProject />
         <Education />
         <Teaching />
