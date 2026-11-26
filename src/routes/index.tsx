@@ -491,6 +491,15 @@ function ProjectCard({ p }: { p: Project }) {
 function Portfolio_Section() {
   const projects: Project[] = [
     {
+      title: "Springridge Learning Academy", tag: "Education · Campaign Design",
+      blurb: "Designed the school's admissions and scholarship campaign — enrolment posters, a fees-and-subjects prospectus, 2027 scholarship flyers, a 3D flyer mockup and the academy crest.",
+      responsibilities: ["Graphic Design", "Campaign Design", "Brand Identity", "Print & Social Creatives", "Marketing Collateral"],
+      achievements: ["2027 scholarship applications campaign", "Form 1 enrolment posters & prospectus sheet", "Custom school crest & brand identity"],
+      gradient: "linear-gradient(135deg,#0B3D91 0%,#166534 55%,#F59E0B 130%)",
+      icon: <GraduationCap size={30} />,
+      image: imagesFor("springeridge-academy")[0]?.url,
+    },
+    {
       title: "Makumbe Avril Holdings", tag: "Website · Branding",
       blurb: "Designed and developed a modern corporate website with premium UX, responsive design, professional branding, service pages and contact forms.",
       responsibilities: ["Website Design", "UI/UX Design", "Branding", "Graphic Design", "Responsive Development"],
@@ -601,6 +610,16 @@ const imagesFor = (slug: string): WorkImage[] => {
 };
 
 const CLIENT_WORK = [
+  {
+    slug: "springeridge-academy",
+    name: "Springridge Learning Academy",
+    role: "Graphic Designer & Digital Marketer",
+    tag: "Education · Admissions Campaign",
+    blurb: "Designed the school's full admissions and scholarship campaign — enrolment posters, a fees-and-subjects prospectus sheet, 2027 scholarship flyers, a 3D printed-flyer mockup and the academy crest, all built to drive Form 1 and Lower 6 applications.",
+    achievements: ["2027 scholarship & admissions campaign", "Form 1 enrolment posters & prospectus sheet", "School crest & brand identity", "Print-ready flyers and 3D mockups"],
+    gradient: "linear-gradient(135deg,#0B3D91 0%,#166534 55%,#F59E0B 130%)",
+    icon: <GraduationCap size={26} />,
+  },
   {
     slug: "dynamic-sales-solutions",
     name: "Dynamic Sales Solutions",
@@ -999,6 +1018,10 @@ function Teaching() {
 /* ---------- Experience ---------- */
 function Experience() {
   const items = [
+    {
+      role: "Graphic Designer & Digital Marketer", org: "Springridge Learning Academy",
+      d: "Designing the school's admissions and scholarship campaign — enrolment posters, prospectus sheets, promotional flyers and the academy crest, supporting enrolment growth for Warren Park D, Harare.",
+    },
     {
       role: "Digital Marketing Specialist", org: "Dynamic Sales Solutions",
       d: "Managed digital campaigns, social media platforms, branding, and online growth strategies across LinkedIn and Facebook.",
