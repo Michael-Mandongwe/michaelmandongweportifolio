@@ -610,6 +610,7 @@ const CLIENT_WORK = [
     achievements: ["LinkedIn grew from ~60 to 300+ followers", "Facebook page passed 1,000 followers", "Promotional flyers & branded asset systems"],
     gradient: "linear-gradient(135deg,#111827 0%,#0B3D91 100%)",
     icon: <TrendingUp size={26} />,
+    facebookUrl: "https://www.facebook.com/profile.php?id=61577108122071",
   },
   {
     slug: "clothsations",
@@ -715,8 +716,16 @@ function ClientWork() {
                   ))}
                 </div>
               </div>
-              <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                <Images size={14} /> {c.images.length} {c.images.length === 1 ? "piece" : "pieces"}
+              <div className="flex flex-wrap items-center gap-3">
+                {"facebookUrl" in c && c.facebookUrl && (
+                  <a href={c.facebookUrl} target="_blank" rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/80 px-3.5 py-1.5 text-xs font-semibold transition hover:border-[color:var(--brand-royal)] hover:text-[color:var(--brand-royal)]">
+                    <Facebook size={13} /> Facebook Page <ExternalLink size={12} />
+                  </a>
+                )}
+                <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  <Images size={14} /> {c.images.length} {c.images.length === 1 ? "piece" : "pieces"}
+                </div>
               </div>
             </div>
           </div>
