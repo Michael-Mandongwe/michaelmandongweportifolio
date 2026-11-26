@@ -491,6 +491,15 @@ function ProjectCard({ p }: { p: Project }) {
 function Portfolio_Section() {
   const projects: Project[] = [
     {
+      title: "Baby Hub", tag: "Retail · Campaign Design",
+      blurb: "Designed a Black Friday campaign for a baby clothing and essentials brand — promotional flyers, social creatives and product-led ads built around a limited-offers sale.",
+      responsibilities: ["Graphic Design", "Campaign Design", "Social Media Creatives", "Promotional Flyers", "Product Showcase Design"],
+      achievements: ["Black Friday creative suite", "Flyers in two brand colourways", "Up to 50% off offer messaging"],
+      gradient: "linear-gradient(135deg,#0B2559 0%,#8E1B63 55%,#E4007C 130%)",
+      icon: <Heart size={30} />,
+      image: imagesFor("baby-hub")[0]?.url,
+    },
+    {
       title: "Springridge Learning Academy", tag: "Education · Campaign Design",
       blurb: "Designed the school's admissions and scholarship campaign — enrolment posters, a fees-and-subjects prospectus, 2027 scholarship flyers, a 3D flyer mockup and the academy crest.",
       responsibilities: ["Graphic Design", "Campaign Design", "Brand Identity", "Print & Social Creatives", "Marketing Collateral"],
@@ -610,6 +619,16 @@ const imagesFor = (slug: string): WorkImage[] => {
 };
 
 const CLIENT_WORK = [
+  {
+    slug: "baby-hub",
+    name: "Baby Hub",
+    role: "Graphic Designer & Digital Marketer",
+    tag: "Retail · Seasonal Campaign",
+    blurb: "Designed the store's Black Friday campaign for a baby clothing and essentials brand — promotional flyers in two brand colourways, social media creatives and product-led ads built around a limited-offers sale of up to 50% off.",
+    achievements: ["Black Friday campaign creative suite", "Promotional flyers in two brand colourways", "Social ad creatives & product showcases", "Offer-led messaging: up to 50% off"],
+    gradient: "linear-gradient(135deg,#0B2559 0%,#8E1B63 55%,#E4007C 130%)",
+    icon: <Heart size={26} />,
+  },
   {
     slug: "springeridge-academy",
     name: "Springridge Learning Academy",
@@ -1019,6 +1038,10 @@ function Teaching() {
 function Experience() {
   const items = [
     {
+      role: "Graphic Designer & Digital Marketer", org: "Baby Hub",
+      d: "Designed the store's Black Friday campaign for a baby clothing and essentials brand — promotional flyers, social media creatives and product-led ads built around a limited-offers sale.",
+    },
+    {
       role: "Graphic Designer & Digital Marketer", org: "Springridge Learning Academy",
       d: "Designing the school's admissions and scholarship campaign — enrolment posters, prospectus sheets, promotional flyers and the academy crest, supporting enrolment growth for Warren Park D, Harare.",
     },
@@ -1041,7 +1064,7 @@ function Experience() {
         <div className="absolute left-4 top-2 bottom-2 w-px bg-border md:left-1/2" />
         <div className="space-y-10">
           {items.map((it, i) => (
-            <div key={it.role} className={`reveal relative grid gap-6 md:grid-cols-2 ${i % 2 ? "md:[&>*:first-child]:col-start-2" : ""}`}>
+            <div key={it.org} className={`reveal relative grid gap-6 md:grid-cols-2 ${i % 2 ? "md:[&>*:first-child]:col-start-2" : ""}`}>
               <div className={`pl-12 md:pl-0 ${i % 2 ? "md:pr-12 md:text-right" : "md:pr-12"}`}>
                 <div className="card-elevated p-6">
                   <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[color:var(--brand-gold)]">
