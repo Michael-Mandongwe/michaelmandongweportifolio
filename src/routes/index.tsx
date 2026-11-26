@@ -621,6 +621,7 @@ const CLIENT_WORK = [
     achievements: ["Meta ad campaigns & product creatives", "Lead-gen funnels and offer design", "Daily social content & customer engagement"],
     gradient: "linear-gradient(135deg,#F59E0B 0%,#f97316 60%,#0B3D91 130%)",
     icon: <Megaphone size={26} />,
+    facebookUrl: "https://www.facebook.com/Clothsations",
   },
   {
     slug: "makumbe-avril-holdings",
