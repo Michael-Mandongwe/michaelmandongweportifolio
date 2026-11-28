@@ -44,9 +44,23 @@ function isH3SwallowedErrorBody(body: string): boolean {
   }
 }
 
+const ASSET_ORIGIN = "https://michaelmandongweportifolio.lovable.app";
+const ASSET_PREFIX = "/__l5e/assets-v1/";
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
+      const url = new URL(request.url);
+      if (url.pathname.startsWith(ASSET_PREFIX)) {
+        const upstream = await fetch(`${ASSET_ORIGIN}${url.pathname}${url.search}`, {
+          method: request.method,
+        });
+        return new Response(upstream.body, {
+          status: upstream.status,
+          statusText: upstream.statusText,
+          headers: upstream.headers,
+        });
+      }
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
       return await normalizeCatastrophicSsrResponse(response);
