@@ -10,6 +10,12 @@ import {
   Images, Expand, ChevronLeft, ChevronRight, ImagePlus,
 } from "lucide-react";
 import michaelAsset from "@/assets/michael.png.asset.json";
+import michaelLogoAsset from "@/assets/gallery/michael-mandongwe-logo.png.asset.json";
+import menuCoverAsset from "@/assets/gallery/crocodile-motel-menu-cover.jpg.asset.json";
+import menuDrinksAsset from "@/assets/gallery/crocodile-motel-menu-drinks.jpg.asset.json";
+import menuSpiritsAsset from "@/assets/gallery/crocodile-motel-menu-spirits.jpg.asset.json";
+import cardGreenAsset from "@/assets/gallery/maralma-business-card-green.jpg.asset.json";
+import cardNavyAsset from "@/assets/gallery/maralma-business-card-navy.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -489,6 +495,7 @@ function ProjectCard({ p }: { p: Project }) {
 }
 
 function Portfolio_Section() {
+  const [galleryOpen, setGalleryOpen] = useState<{ items: WorkImage[]; index: number } | null>(null);
   const projects: Project[] = [
     {
       title: "Baby Hub", tag: "Retail · Campaign Design",
@@ -542,18 +549,39 @@ function Portfolio_Section() {
       achievements: ["Logo concepts & brand system", "Product campaigns", "Content calendar"],
       gradient: "linear-gradient(135deg,#0B3D91 0%,#111827 100%)",
       icon: <Sparkles size={30} />,
+      image: imagesFor("sneakers-vault-zw")[0]?.url,
     },
   ];
 
-  const gallery = [
-    { t: "Logo Designs", i: <PenTool size={22} />, g: "linear-gradient(135deg,#0B3D91,#1e5cd6)" },
-    { t: "Brand Identity", i: <Sparkles size={22} />, g: "linear-gradient(135deg,#F59E0B,#f97316)" },
+  const sneakersBrandImages = imagesFor("sneakers-vault-zw").slice().reverse();
+  const gallery: { t: string; i: ReactNode; g: string; images?: WorkImage[] }[] = [
+    {
+      t: "Logo Designs", i: <PenTool size={22} />, g: "linear-gradient(135deg,#0B3D91,#1e5cd6)",
+      images: [{ url: michaelLogoAsset.url, caption: "Michael Mandongwe — Spreading Light · Igniting Minds", name: "michael-mandongwe-logo.png" }],
+    },
+    {
+      t: "Brand Identity", i: <Sparkles size={22} />, g: "linear-gradient(135deg,#F59E0B,#f97316)",
+      images: sneakersBrandImages,
+    },
     { t: "Social Media Graphics", i: <Instagram size={22} />, g: "linear-gradient(135deg,#111827,#0B3D91)" },
     { t: "Marketing Flyers", i: <Megaphone size={22} />, g: "linear-gradient(135deg,#1e5cd6,#F59E0B)" },
     { t: "Posters", i: <Layout size={22} />, g: "linear-gradient(135deg,#0B3D91,#F59E0B)" },
-    { t: "Business Cards", i: <Briefcase size={22} />, g: "linear-gradient(135deg,#111827,#334155)" },
+    {
+      t: "Business Cards", i: <Briefcase size={22} />, g: "linear-gradient(135deg,#111827,#334155)",
+      images: [
+        { url: cardGreenAsset.url, caption: "Maralma Interior Designs — Green & Gold Business Card", name: "maralma-business-card-green.jpg" },
+        { url: cardNavyAsset.url, caption: "Maralma Interior Designs — Navy & Gold Business Card", name: "maralma-business-card-navy.jpg" },
+      ],
+    },
     { t: "Company Profiles", i: <Award size={22} />, g: "linear-gradient(135deg,#0B3D91,#111827)" },
-    { t: "Menu Designs", i: <PenTool size={22} />, g: "linear-gradient(135deg,#f97316,#F59E0B)" },
+    {
+      t: "Menu Designs", i: <PenTool size={22} />, g: "linear-gradient(135deg,#f97316,#F59E0B)",
+      images: [
+        { url: menuCoverAsset.url, caption: "The Crocodile Motel — Menu Cover, Breakfast & Starters", name: "crocodile-motel-menu-cover.jpg" },
+        { url: menuDrinksAsset.url, caption: "The Crocodile Motel — Drinks, Beers & Ciders", name: "crocodile-motel-menu-drinks.jpg" },
+        { url: menuSpiritsAsset.url, caption: "The Crocodile Motel — Whiskey, Cocktails & Thank You", name: "crocodile-motel-menu-spirits.jpg" },
+      ],
+    },
     { t: "Promotional Banners", i: <Rocket size={22} />, g: "linear-gradient(135deg,#1e5cd6,#0B3D91)" },
     { t: "Website UI Mockups", i: <Layout size={22} />, g: "linear-gradient(135deg,#0B3D91,#1e5cd6)" },
     { t: "Digital Advertisements", i: <Target size={22} />, g: "linear-gradient(135deg,#F59E0B,#0B3D91)" },
@@ -571,20 +599,53 @@ function Portfolio_Section() {
         <p className="mt-2 max-w-2xl text-muted-foreground">A curated peek at the categories of design work I deliver for clients.</p>
       </div>
       <div className="mt-8 grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
-        {gallery.map((g) => (
-          <div key={g.t} className="reveal group relative aspect-square overflow-hidden rounded-2xl border border-border" style={{ boxShadow: "var(--shadow-soft)" }}>
-            <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-110" style={{ background: g.g }} />
-            <div className="absolute inset-0 opacity-40 mix-blend-overlay" style={{ backgroundImage: "radial-gradient(circle at 30% 20%, rgba(255,255,255,.4), transparent 40%)" }} />
-            <div className="absolute inset-x-0 bottom-0 p-4 text-white">
-              <div className="glass mb-2 inline-grid h-10 w-10 place-items-center rounded-xl text-white" style={{ background: "rgba(255,255,255,.18)" }}>{g.i}</div>
-              <div className="text-sm font-semibold">{g.t}</div>
+        {gallery.map((g) => {
+          const cover = g.images?.[0];
+          const clickable = Boolean(g.images && g.images.length > 0);
+          return (
+            <div key={g.t}
+              onClick={clickable ? () => setGalleryOpen({ items: g.images!, index: 0 }) : undefined}
+              role={clickable ? "button" : undefined}
+              tabIndex={clickable ? 0 : undefined}
+              onKeyDown={clickable ? (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setGalleryOpen({ items: g.images!, index: 0 }); } } : undefined}
+              className={`reveal group relative aspect-square overflow-hidden rounded-2xl border border-border ${clickable ? "cursor-pointer" : ""}`}
+              style={{ boxShadow: "var(--shadow-soft)" }}>
+              {cover ? (
+                <>
+                  <img src={cover.url} alt={`${g.t} — ${cover.caption}`} loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/10" />
+                </>
+              ) : (
+                <>
+                  <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-110" style={{ background: g.g }} />
+                  <div className="absolute inset-0 opacity-40 mix-blend-overlay" style={{ backgroundImage: "radial-gradient(circle at 30% 20%, rgba(255,255,255,.4), transparent 40%)" }} />
+                </>
+              )}
+              {g.images && g.images.length > 1 && (
+                <span className="glass absolute right-3 top-3 rounded-full px-2.5 py-1 text-[11px] font-semibold text-white" style={{ background: "rgba(0,0,0,.45)" }}>
+                  {g.images.length} designs
+                </span>
+              )}
+              <div className="absolute inset-x-0 bottom-0 p-4 text-white">
+                <div className="glass mb-2 inline-grid h-10 w-10 place-items-center rounded-xl text-white" style={{ background: "rgba(255,255,255,.18)" }}>{g.i}</div>
+                <div className="text-sm font-semibold">{g.t}</div>
+              </div>
+              <div className="absolute inset-0 grid place-items-center bg-black/0 opacity-0 transition group-hover:bg-black/30 group-hover:opacity-100">
+                {clickable ? <Expand className="text-white" /> : <ExternalLink className="text-white" />}
+              </div>
             </div>
-            <div className="absolute inset-0 grid place-items-center bg-black/0 opacity-0 transition group-hover:bg-black/30 group-hover:opacity-100">
-              <ExternalLink className="text-white" />
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
+      {galleryOpen && (
+        <Lightbox
+          items={galleryOpen.items}
+          index={galleryOpen.index}
+          setIndex={(i) => setGalleryOpen({ ...galleryOpen, index: i })}
+          onClose={() => setGalleryOpen(null)}
+        />
+      )}
     </Section>
   );
 }
@@ -670,6 +731,17 @@ const CLIENT_WORK = [
     achievements: ["Responsive corporate website", "Service & contact page design", "Brand identity and supporting graphics"],
     gradient: "linear-gradient(135deg,#0B3D91 0%,#1e5cd6 60%,#F59E0B 130%)",
     icon: <Globe size={26} />,
+  },
+  {
+    slug: "sneakers-vault-zw",
+    name: "Sneakers Vault ZW",
+    role: "Brand Strategist · Graphic Designer",
+    tag: "Brand Identity · Campaigns",
+    blurb: "Built the digital brand from the ground up — logo design, product-led social campaigns and a bold street-style visual identity for sneaker lovers in Zimbabwe.",
+    achievements: ["Logo design & brand system", "Product launch campaigns", "Google Business Profile presence"],
+    gradient: "linear-gradient(135deg,#0B3D91 0%,#111827 100%)",
+    icon: <Sparkles size={26} />,
+    googleBusinessUrl: "https://share.google/g1YAJcu7CwRaMKbuA",
   },
 ];
 
@@ -760,6 +832,12 @@ function ClientWork() {
                   <a href={c.facebookUrl} target="_blank" rel="noreferrer"
                     className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/80 px-3.5 py-1.5 text-xs font-semibold transition hover:border-[color:var(--brand-royal)] hover:text-[color:var(--brand-royal)]">
                     <Facebook size={13} /> Facebook Page <ExternalLink size={12} />
+                  </a>
+                )}
+                {"googleBusinessUrl" in c && c.googleBusinessUrl && (
+                  <a href={c.googleBusinessUrl} target="_blank" rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/80 px-3.5 py-1.5 text-xs font-semibold transition hover:border-[color:var(--brand-royal)] hover:text-[color:var(--brand-royal)]">
+                    <MapPin size={13} /> Google Business Profile <ExternalLink size={12} />
                   </a>
                 )}
                 <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
